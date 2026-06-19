@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Environmental Prediction System</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#00c6ff,#0072ff);
+    color: white;
+    margin: 0;
+}
+.container{
+    width: 85%;
+    margin: auto;
+    padding: 20px;
+}
+h1,h2,h3{
+    text-align: center;
+}
+.card{
+    background: rgba(255,255,255,0.15);
+    border-radius: 18px;
+    padding: 25px;
+    margin-top: 25px;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 15px;
+}
+label{
+    font-weight: bold;
+    font-size: 14px;
+}
+input, select{
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 5px;
+}
+.checkbox-group{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    gap: 10px;
+}
+button{
+    display: block;
+    margin: 25px auto 10px;
+    padding: 12px 35px;
+    border-radius: 14px;
+    border: none;
+    background: #ff9800;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+.result{
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(0,0,0,0.35);
+    border-radius: 12px;
+    text-align: center;
+    font-size: 20px;
+}
+.center{
+    text-align: center;
+}
+a{
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>🌍 AI Environmental Prediction System</h1>
+
+<!-- ================= HOME ================= -->
+{% if page == "home" %}
+<div class="card center">
+    <h2>Select Prediction Module</h2>
+    <a href="{{ url_for('carbon') }}">
+        <button>🌱 Carbon Footprint</button>
+    </a>
+    <a href="{{ url_for('aqi') }}">
+        <button>🌫️ Air Quality Index</button>
+    </a>
+</div>
+{% endif %}
+
+<!-- ================= CARBON ================= -->
+{% if page == "carbon" %}
+<div class="card">
+<h2>🌱 Carbon Footprint Calculator</h2>
+
+<form method="POST">
+<div class="grid">
+
+<div>
+<label>Body Type</label>
+<select name="body_type">
+<option>underweight</option>
+<option selected>normal</option>
+<option>overweight</option>
+<option>obese</option>
+</select>
+</div>
+
+<div>
+<label>Sex</label>
+<select name="sex">
+<option>female</option>
+<option selected>male</option>
+</select>
+</div>
+
+<div>
+<label>Diet</label>
+<select name="diet">
+<option>omnivore</option>
+<option>vegetarian</option>
+<option>vegan</option>
+<option>pescatarian</option>
+</select>
+</div>
+
+<div>
+<label>Shower Frequency</label>
+<select name="shower">
+<option>less frequently</option>
+<option>daily</option>
+<option>twice a day</option>
+<option>more frequently</option>
+</select>
+</div>
+
+<div>
+<label>Social Activity</label>
+<select name="social">
+<option>never</option>
+<option>sometimes</option>
+<option>often</option>
+</select>
+</div>
+
+<div>
+<label>Heating Source</label>
+<select name="heating">
+<option>electricity</option>
+<option>natural gas</option>
+<option>coal</option>
+<option>wood</option>
+</select>
+</div>
+
+<div>
+<label>Transport Mode</label>
+<select name="transport">
+<option>private</option>
+<option>public</option>
+</select>
+</div>
+
+<div>
+<label>Vehicle Type</label>
+<select name="vehicle">
+<option>None</option>
+<option>petrol</option>
+<option>diesel</option>
+<option>electric</option>
+</select>
+</div>
+
+<div>
+<label>Flight Frequency</label>
+<select name="flight">
+<option>never</option>
+<option>rarely</option>
+<option>frequently</option>
+<option>very frequently</option>
+</select>
+</div>
+
+<div>
+<label>Bag Size</label>
+<select name="bag_size">
+<option>small</option>
+<option>medium</option>
+<option>large</option>
+<option>extra large</option>
+</select>
+</div>
+
+<div>
+<label>Energy Efficiency Awareness</label>
+<select name="energy_eff">
+<option>No</option>
+<option>Sometimes</option>
+<option>Yes</option>
+</select>
+</div>
+
+<div>
+<label>Grocery Spending</label>
+<input type="number" name="grocery" required>
+</div>
+
+<div>
+<label>Vehicle Distance (km)</label>
+<input type="number" name="vehicle_distance" required>
+</div>
+
+<div>
+<label>Weekly Waste (kg)</label>
+<input type="number" name="waste" required>
+</div>
+
+<div>
+<label>TV Usage (hrs/day)</label>
+<input type="number" name="tv" required>
+</div>
+
+<div>
+<label>Internet Usage (hrs/day)</label>
+<input type="number" name="internet" required>
+</div>
+
+<div>
+<label>Clothes Purchased / Month</label>
+<input type="number" name="clothes" required>
+</div>
+
+</div>
+
+<div class="card">
+<h3>♻️ Recycling Habits</h3>
+<div class="checkbox-group">
+<label><input type="checkbox" name="Plastic"> Plastic</label>
+<label><input type="checkbox" name="Glass"> Glass</label>
+<label><input type="checkbox" name="Metal"> Metal</label>
+<label><input type="checkbox" name="Paper"> Paper</label>
+</div>
+</div>
+
+<div class="card">
+<h3>🔥 Cooking / Gas Appliances</h3>
+<div class="checkbox-group">
+<label><input type="checkbox" name="Microwave"> Microwave</label>
+<label><input type="checkbox" name="Oven"> Oven</label>
+<label><input type="checkbox" name="Stove"> Stove</label>
+<label><input type="checkbox" name="Airfryer"> Airfryer</label>
+<label><input type="checkbox" name="Grill"> Grill</label>
+</div>
+</div>
+
+<button type="submit">Predict Carbon Footprint</button>
+</form>
+
+{% if prediction is not none %}
+<div class="result">
+<strong>{{ prediction }} kg CO₂ / year</strong><br>
+{{ message }}
+</div>
+{% endif %}
+</div>
+{% endif %}
+
+<!-- ================= AQI ================= -->
+{% if page == "aqi" %}
+<div class="card">
+<h2>🌫️ Air Quality Index Prediction</h2>
+
+<form method="POST">
+<div class="grid">
+
+<div>
+<label>CO (ppm)</label>
+<input type="number" step="any" name="CO" required>
+</div>
+
+<div>
+<label>HC (ppm)</label>
+<input type="number" step="any" name="HC" required>
+</div>
+
+<div>
+<label>Temperature (°C)</label>
+<input type="number" step="any" name="Temp" required>
+</div>
+
+<div>
+<label>Humidity (%)</label>
+<input type="number" step="any" name="Hum" required>
+</div>
+
+<div>
+<label>CO₂ (ppm)</label>
+<input type="number" step="any" name="CO2" required>
+</div>
+
+<div>
+<label>TVOC (ppb)</label>
+<input type="number" step="any" name="TVOC" required>
+</div>
+
+<div>
+<label>Dust Density</label>
+<input type="number" step="any" name="DD" required>
+</div>
+
+</div>
+
+<button type="submit">Predict AQI</button>
+</form>
+
+{% if prediction %}
+<div class="result">
+<strong>Predicted AQI Level:</strong><br>
+{{ prediction }}
+</div>
+{% endif %}
+</div>
+{% endif %}
+
+</div>
+</body>
+</html>
